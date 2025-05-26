@@ -1,6 +1,8 @@
 package com.example.domain.entity;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
+import com.example.enums.AttendanceType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,7 +37,7 @@ public class AttendanceEntity {
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
 	
-	private Date at;
+	private LocalDateTime at;
 	
 	/*出退勤の値のリレーション
 	 * 文字列型に変換する
