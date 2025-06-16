@@ -1,4 +1,3 @@
-
 /*usersテーブル作成*/
 CREATE TABLE IF NOT EXISTS users (
 	id INT AUTO_INCREMENT PRIMARY KEY, 
@@ -85,4 +84,3 @@ CREATE TABLE IF NOT EXISTS holidays (
 	date DATE PRIMARY KEY, 
 	name VARCHAR(10) NOT NULL/*休日の名前*/
 );
-

@@ -1,16 +1,33 @@
 <!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+	<head>
+		<meta charset="UTF-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!--CSS読み込み-->
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<!-- jQuery と Bootstrap JS -->
+		<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.bundle.min.js}"></script>
+		
+		<title>ダッシュボード</title>
+	</head>
+	<body>
+		 <div layout:fragment="content">
+			<div class="container-fluid p-3">
+				<!-- カレンダーエリア -->
+				<div class="col-md-9">
+					<div class="dashboard-calendar">カレンダー</div>
+				</div>
 
-<html xmlns:th="http://www.thymeleaf.org"　xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout">
-<head>
-	<meta charset="UTF-8"></meta>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<!--CSS読み込み-->
-	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-	
-	<title>ダッシュボード</title>
-</head>
-<body>
-	<h1>ダッシュボード</h1>
-</body>
+				<!-- ボタンエリア -->
+				<div class="col-md-3 d-flex flex-column dashboard-buttons">
+					<button class="btn btn-success">出勤</button>
+					<button class="btn btn-warning">休憩開始 / 休憩終了</button>
+					<button class="btn btn-danger">退勤</button>
+					<button class="btn btn-secondary">現在時刻</button>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

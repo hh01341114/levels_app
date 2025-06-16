@@ -4,36 +4,51 @@ import java.util.List;
 
 import com.example.enums.Role;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 社員情報（usersテーブル）を保持するEntity
  * MYSQLのusersテーブルとマッピングされる
  */
-
 @Data
+@ToString(exclude = "attendanceList") 
 @Entity
 @Table(name="users")
 public class UserEntity {
 	
-	//USERSテーブル（主キー）
+	/**
+	 * usersテーブルの主キー
+	 * @GeneratedValueで自動採番
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	/**
+	 * email（ログインid）のインスタンス
+	 */
 	private String email;
+	/**
+	 * passwordのインスタンス
+	 */
 	private String password;
+	/**
+	 * ユーザーネームのインスタンス
+	 */
 	private String name;
-	private String department_id;
+	
+	@Column(name = "department_id")
+	private Integer departmentId;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
