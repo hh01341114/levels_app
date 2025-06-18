@@ -13,6 +13,10 @@ import com.example.Service.UserService;
 import com.example.domain.entity.UserEntity;
 import com.example.form.UserDetailForm;
 
+/**
+ * ユーザーディテールコントローラークラス
+ * ユーザー詳細編集画面を表示する
+ */
 @Controller
 @RequestMapping("/user")
 public class UserDetailController {
