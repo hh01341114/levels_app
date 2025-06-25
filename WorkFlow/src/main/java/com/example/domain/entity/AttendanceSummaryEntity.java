@@ -35,9 +35,6 @@ public class AttendanceSummaryEntity {
 	@Column(name = "is_absent", nullable = false)
 	private Boolean isAbsent = false;
 	
-	@Column(name = "remarks")
-	private String remarks;
-	
 	@Column(name = "work_start")
 	private Integer workStart;
 	
@@ -49,4 +46,7 @@ public class AttendanceSummaryEntity {
 	
 	@Column(name = "break_end")
 	private Integer breakEnd;
+	
+	@Column(name = "remarks")
+	private String remarks;
 }
