@@ -65,6 +65,9 @@ public class UserServiceImpl implements UserService {
 		return userEntity;
 	}
 
+	/**
+	 *ユーザー更新
+	 */
 	@Transactional
 	@Override
 	public void updateUserOne(String email, String password, String name) {

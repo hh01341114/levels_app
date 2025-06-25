@@ -58,6 +58,6 @@ public class UserEntity {
 	 * このユーザーに紐づく打刻一覧（attendanceテーブル）
 	 * AttendanceEntity 側の `user` フィールドを参照
 	 */
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "userEntity")
 	private List<AttendanceEntity> attendanceList;
 }

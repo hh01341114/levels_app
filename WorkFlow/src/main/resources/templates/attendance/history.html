@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+	<title>勤怠履歴確認画面</title>
+	<link rel="stylesheet" href="@{/css/user/list.css}">
+	<script th:src="@{/js/user/detail.js}" defer></script>
+</head>
+
+<body>
+	<h1>勤怠履歴</h1>
+
+	<ul>
+		<li th:each="record : ${history}">
+			<span th:text="${#temporals.format(record.at, 'yyyy-MM-dd HH:mm')}"></span> 
+			<span th:text="${record.type}"></span>
+		</li>
+	</ul>
+
+	<a th:href="@{/user/dashboard}">ダッシュボードに戻る</a>
+</body>
+</html>

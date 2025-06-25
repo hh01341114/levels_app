@@ -26,17 +26,20 @@ import lombok.ToString;
 @Table(name = "attendance")
 public class AttendanceEntity {
 
-	/** usersテーブルの主キーを定義 */
+
+	/**
+	 * usersテーブルの主キーを定義
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	/**
-	 * UserEntityとのリレーション 外部キーにuser_idを設定
+	 * UserEntityとのリレーション (外部キーにid)を設定
 	 */
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private UserEntity user;
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private UserEntity userEntity;
 
 	private LocalDateTime at;
 
