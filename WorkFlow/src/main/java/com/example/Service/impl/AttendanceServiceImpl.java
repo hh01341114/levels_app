@@ -10,12 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Service.AttendanceService;
+import com.example.Service.AttendanceSummaryService;
 import com.example.domain.entity.AttendanceEntity;
 import com.example.domain.entity.UserEntity;
 import com.example.enums.AttendanceType;
 import com.example.repository.AttendanceRepository;
 import com.example.repository.UserRepository;
 
+/**
+ * アテンダンスサービスの実装クラス
+ * 打刻の情報をDBに記録する
+ */
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
 	
@@ -24,6 +29,9 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private AttendanceSummaryService attendanceSummaryService;
 	
 	/**
 	 *ログイン中のユーザーの打刻情報を取得
@@ -42,6 +50,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 		
 		//リポシトリに保存
 		attendanceRepository.save(attendanceEntity);
+		attendanceSummaryService.updateSummary(userEntity, type);
 	}
 	
 	/**
