@@ -1,4 +1,4 @@
-package com.example.Service.impl;
+package com.example.service.impl;
 
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.entity.UserEntity;
-import com.example.Service.UserService;
+import com.example.service.UserService;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

@@ -1,4 +1,4 @@
-package com.example.Service;
+package com.example.service;
 
 import java.util.List;
 
@@ -24,7 +24,6 @@ public interface UserService {
 	/**
 	 * ユーザー１件取得
 	 * @param email
-	 * @return
 	 */
 	public UserEntity getUserOne(String email);
 	
@@ -45,7 +44,6 @@ public interface UserService {
 	/**
 	 * ログインユーザー取得
 	 * @param email
-	 * @return
 	 */
 	public UserEntity getLoginUser(String email);
 }

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.Service.UserService;
 import com.example.domain.entity.UserEntity;
 import com.example.form.GroupOrder;
 import com.example.form.SignupForm;
+import com.example.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
