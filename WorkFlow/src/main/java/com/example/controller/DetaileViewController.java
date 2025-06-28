@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.Service.UserService;
 import com.example.domain.entity.UserEntity;
 import com.example.form.UserDetailForm;
+import com.example.service.UserService;
 
 /**
  * ディテールビューコントローラークラス

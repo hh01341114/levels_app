@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.Service.UserService;
 import com.example.domain.entity.UserEntity;
+import com.example.service.UserService;
 
 /**
  * ダッシュボードコントローラークラス

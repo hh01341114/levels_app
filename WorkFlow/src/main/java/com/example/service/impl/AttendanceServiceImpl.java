@@ -1,4 +1,4 @@
-package com.example.Service.impl;
+package com.example.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,13 +9,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Service.AttendanceService;
-import com.example.Service.AttendanceSummaryService;
+import com.example.domain.dto.AttendanceSummaryDto;
 import com.example.domain.entity.AttendanceEntity;
 import com.example.domain.entity.UserEntity;
 import com.example.enums.AttendanceType;
 import com.example.repository.AttendanceRepository;
 import com.example.repository.UserRepository;
+import com.example.service.AttendanceService;
+import com.example.service.AttendanceSummaryService;
 
 /**
  * アテンダンスサービスの実装クラス
@@ -58,8 +59,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	 *日付（降順）
 	 */
 	@Override
-	public List<AttendanceEntity> getAttendanceHistory(Integer userId) {
-		return attendanceRepository.findByUserEntityIdOrderByAtDesc(userId);
+	public List<AttendanceEntity> getAttendanceHistory(UserEntity userEntity) {
+		return attendanceRepository.findByUserEntityIdOrderByAtDesc(userEntity);
 	}
-	
 }

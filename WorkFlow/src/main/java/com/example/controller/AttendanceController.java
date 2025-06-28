@@ -1,6 +1,10 @@
 package com.example.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,11 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.Service.AttendanceService;
-import com.example.Service.UserService;
-import com.example.domain.entity.AttendanceEntity;
+import com.example.domain.dto.AttendanceSummaryDto;
+import com.example.domain.entity.AttendanceSummaryEntity;
 import com.example.domain.entity.UserEntity;
 import com.example.enums.AttendanceType;
+import com.example.mapper.AttendanceSummaryMapper;
+import com.example.service.AttendanceService;
+import com.example.service.AttendanceSummaryService;
+import com.example.service.UserService;
 
 /**
  * アテンダンスコントローラー
@@ -27,6 +34,9 @@ import com.example.enums.AttendanceType;
 public class AttendanceController {
 	@Autowired
 	private AttendanceService attendanceService;
+	
+	@Autowired
+	private AttendanceSummaryService summaryService;
 	
 	@Autowired
 	private UserService userService;
@@ -46,11 +56,11 @@ public class AttendanceController {
 		String email = userDetails.getUsername();
 		UserEntity loginUser = userService.getLoginUser(email);
 		
-		//String型からenum型に変換して渡す
+		//String型からENUM型に変換して渡す
 		AttendanceType attendanceType = AttendanceType.valueOf(type);
 		attendanceService.recordPunch(loginUser.getId(), attendanceType);
 		
-		return "redirect:/attendance/history";
+		return "redirect:/dashboard";
 	}
 	
 	@GetMapping("/history")
@@ -58,10 +68,51 @@ public class AttendanceController {
 		String email = userDetails.getUsername();
 		UserEntity loginUser = userService.getLoginUser(email);
 		
-		List<AttendanceEntity> history = attendanceService.getAttendanceHistory(loginUser.getId());
+		//勤怠サマリーの取得
+		List<AttendanceSummaryEntity> summaryList = summaryService.getSummaryByUser(loginUser);
 		
-		model.addAttribute("history", history);
+		//DTOに変換（リスト形式）
+		List<AttendanceSummaryDto> dtoList = summaryList.stream()
+				.map(AttendanceSummaryMapper::toSummaryDto)
+				.toList();
+		
+		dtoList.forEach(dto -> System.out.println("DTO: " + dto));
+		
+		model.addAttribute("history", dtoList);
 		
 		return "attendance/history";
+	}
+	
+	@GetMapping("/history/csv")
+	public void exportCsv(
+			@AuthenticationPrincipal UserDetails userDetails,
+			HttpServletResponse response
+	) throws IOException {
+		
+		//文字コードの指定
+		response.setContentType("text/csv; charset=UTF-8");
+		//ファイルの指定
+		response.setHeader("Content-Disposition", "attachment; filename=\"attendance_history.csv\"");
+		
+		//ログインユーザーの取得
+		String email = userDetails.getUsername();
+		UserEntity user = userService.getLoginUser(email);
+		
+		//勤怠履歴の取得
+		List<AttendanceSummaryDto> summaries = summaryService.getSummaryDtoByUser(user);
+		
+		PrintWriter writer = response.getWriter();
+		writer.println("日付,出勤時間,退勤時間,実働時間,休憩時間");
+		
+		for (AttendanceSummaryDto dto : summaries) {
+			writer.printf("%s,%s,%s,%s,%s%n",
+					dto.getWorkDate(),
+					dto.getWorkStart(),
+					dto.getWorkEnd(),
+					dto.getWorkingMinutes(),
+					dto.getBreakMinutes()
+			);
+		}
+		writer.flush();
 	}
 }

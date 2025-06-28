@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.example.Service.UserService;
 import com.example.domain.entity.UserEntity;
+import com.example.service.UserService;
 
 /**
  * コントロールアドバイスクラス

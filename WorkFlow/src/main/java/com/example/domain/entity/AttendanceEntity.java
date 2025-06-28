@@ -21,7 +21,7 @@ import lombok.ToString;
  * 勤務情報（attendanceテーブル）を定義する
  */
 @Data
-@ToString(exclude = "user")
+@ToString(exclude = "userEntity")
 @Entity
 @Table(name = "attendance")
 public class AttendanceEntity {

@@ -1,8 +1,10 @@
-package com.example.Service;
+package com.example.service;
 
 import java.util.List;
 
+import com.example.domain.dto.AttendanceSummaryDto;
 import com.example.domain.entity.AttendanceEntity;
+import com.example.domain.entity.UserEntity;
 import com.example.enums.AttendanceType;
 
 /**
@@ -17,5 +19,5 @@ public interface AttendanceService {
 	 * @param userId
 	 * @return
 	 */
-	public List<AttendanceEntity> getAttendanceHistory(Integer userId);
+	public List<AttendanceEntity> getAttendanceHistory(UserEntity userEntity);
 }

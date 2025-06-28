@@ -1,4 +1,4 @@
-package com.example.Service.impl;
+package com.example.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +11,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.Service.UserService;
 import com.example.domain.entity.UserEntity;
 import com.example.enums.Role;
 import com.example.repository.UserRepository;
+import com.example.service.UserService;
 
 /**
  * 
