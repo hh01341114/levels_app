@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.entity.AttendanceEntity;
 import com.example.domain.entity.UserEntity;
+import com.example.enums.AttendanceType;
 
 /**
  * アテンダンスリポシトリークラス
@@ -16,4 +17,6 @@ import com.example.domain.entity.UserEntity;
 public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Integer> {
 	// 特定のユーザーに紐づく勤怠履歴を取得（新しい順）
 	List<AttendanceEntity> findByUserEntityIdOrderByAtDesc(UserEntity userEntity);
+	
+	AttendanceType findFirstByTypeOrderByAtDesc(Integer userId);
 }

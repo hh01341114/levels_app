@@ -24,4 +24,5 @@ public class UserDetailForm {
 	 * 部署名
 	 */
 	private Integer departmentId;
+	
 }

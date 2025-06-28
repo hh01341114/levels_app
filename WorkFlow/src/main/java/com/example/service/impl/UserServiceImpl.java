@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 *ユーザー更新
+	 * ユーザー更新
 	 */
 	@Transactional
 	@Override
@@ -92,4 +92,5 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = optional.orElse(null);
 		return userEntity;
 	}
+
 }

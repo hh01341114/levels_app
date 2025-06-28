@@ -62,4 +62,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<AttendanceEntity> getAttendanceHistory(UserEntity userEntity) {
 		return attendanceRepository.findByUserEntityIdOrderByAtDesc(userEntity);
 	}
+	
+	@Override
+	public AttendanceType getLoginUserType(Integer userId) {
+		AttendanceType type = attendanceRepository.findFirstByTypeOrderByAtDesc(userId);
+		return type;
+	}
 }

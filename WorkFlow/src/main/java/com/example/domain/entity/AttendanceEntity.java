@@ -2,18 +2,17 @@ package com.example.domain.entity;
 
 import java.time.LocalDateTime;
 
-import com.example.enums.AttendanceType;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.example.enums.AttendanceType;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -46,7 +45,7 @@ public class AttendanceEntity {
 	/*
 	 * 出退勤の値のリレーション 文字列型に変換する
 	 */
-	@Enumerated(EnumType.STRING)
+	
 	@Column(name = "type")
 	private AttendanceType type;
 

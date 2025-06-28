@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.domain.entity.UserEntity;
+import com.example.enums.AttendanceType;
+import com.example.repository.AttendanceRepository;
+import com.example.service.AttendanceService;
 import com.example.service.UserService;
 
 /**
@@ -20,6 +23,8 @@ public class DashboardController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AttendanceService attendanceService;
 
 	/** ダッシュボード画面の表示 */
 	@GetMapping("/dashboard")
@@ -28,6 +33,7 @@ public class DashboardController {
 		//ログインユーザー取得
 		String email = userDetails.getUsername();
 		UserEntity loginUser = userService.getLoginUser(email);
+		AttendanceType type = attendanceService.getLoginUserType(loginUser.getId());
 
 		// 今日の日付
 		LocalDate today = LocalDate.now();
@@ -35,7 +41,10 @@ public class DashboardController {
 		// モデルに値を渡す
 		model.addAttribute("today", today);
 		model.addAttribute("loginUser", loginUser);
+		model.addAttribute("type", type);
 
+		System.out.print(type);
+		
 		// Thymeleafテンプレートに遷移
 		return "dashboard";
 	}

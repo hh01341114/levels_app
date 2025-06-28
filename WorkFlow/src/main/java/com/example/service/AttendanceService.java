@@ -20,4 +20,10 @@ public interface AttendanceService {
 	 * @return
 	 */
 	public List<AttendanceEntity> getAttendanceHistory(UserEntity userEntity);
+	
+	/**
+	 * ログインユーザー取得
+	 * @param email
+	 */
+	public AttendanceType getLoginUserType(Integer userId);
 }

@@ -1,5 +1,6 @@
 package com.example.domain.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import com.example.enums.Role;
