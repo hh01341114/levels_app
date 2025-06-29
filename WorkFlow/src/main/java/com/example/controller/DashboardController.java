@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.domain.entity.UserEntity;
 import com.example.enums.AttendanceType;
-import com.example.repository.AttendanceRepository;
 import com.example.service.AttendanceService;
 import com.example.service.UserService;
 

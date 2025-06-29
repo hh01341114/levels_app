@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,6 @@ import lombok.ToString;
 @Table(name = "attendance")
 public class AttendanceEntity {
 
-
 	/**
 	 * usersテーブルの主キーを定義
 	 */
@@ -45,8 +46,7 @@ public class AttendanceEntity {
 	/*
 	 * 出退勤の値のリレーション 文字列型に変換する
 	 */
-	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "type")
 	private AttendanceType type;
-
 }

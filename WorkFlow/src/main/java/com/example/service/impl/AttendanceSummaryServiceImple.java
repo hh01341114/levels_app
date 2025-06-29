@@ -38,8 +38,8 @@ public class AttendanceSummaryServiceImple implements AttendanceSummaryService {
 	 *AttendanceSummaryDtoを返すメソッド
 	 */
 	@Override
-	public List<AttendanceSummaryDto> getSummaryDtoByUser(UserEntity userEntity) {
-		List<AttendanceSummaryEntity> entities = summaryRepository.findByUserOrderByWorkDateDesc(userEntity);
+	public List<AttendanceSummaryDto> getSummaryDtoByUser(UserEntity userEntity, LocalDate startMonth, LocalDate endMonth) {
+		List<AttendanceSummaryEntity> entities = summaryRepository.findByUserAndWorkDateBetweenOrderByWorkDateAsc(userEntity, startMonth, endMonth);
 		return entities.stream()
 				.map(AttendanceSummaryMapper::toSummaryDto)
 				.toList();
@@ -84,7 +84,7 @@ public class AttendanceSummaryServiceImple implements AttendanceSummaryService {
 	 *ユーザーに紐づく勤怠サマリーデータを取得する
 	 */
 	@Override
-	public List<AttendanceSummaryEntity> getSummaryByUser(UserEntity userEntity) {
-		return summaryRepository.findByUserOrderByWorkDateDesc(userEntity);
+	public List<AttendanceSummaryEntity> getSummaryByUser(UserEntity userEntity, LocalDate startMonth, LocalDate endMonth) {
+		return summaryRepository.findByUserAndWorkDateBetweenOrderByWorkDateAsc(userEntity, startMonth, endMonth);
 	}
 }

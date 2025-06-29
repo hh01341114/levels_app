@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.domain.dto.AttendanceSummaryDto;
 import com.example.domain.entity.AttendanceEntity;
 import com.example.domain.entity.UserEntity;
 import com.example.enums.AttendanceType;
@@ -65,7 +64,9 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	@Override
 	public AttendanceType getLoginUserType(Integer userId) {
-		AttendanceType type = attendanceRepository.findFirstByTypeOrderByAtDesc(userId);
-		return type;
+		AttendanceEntity attendanceEntity = attendanceRepository.findFirstByUserEntityIdOrderByAtDesc(userId);
+			AttendanceType type = attendanceEntity.getType();
+			
+			return type;
 	}
 }
