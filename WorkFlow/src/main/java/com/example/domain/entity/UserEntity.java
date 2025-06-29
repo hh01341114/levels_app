@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.example.enums.Role;
+import com.example.domain.enums.Role;
 
 import lombok.Data;
 import lombok.ToString;
@@ -22,7 +22,7 @@ import lombok.ToString;
  * MYSQLのusersテーブルとマッピングされる
  */
 @Data
-@ToString(exclude = "attendanceList") 
+@ToString(exclude = "attendanceList")
 @Entity
 @Table(name="users")
 public class UserEntity {

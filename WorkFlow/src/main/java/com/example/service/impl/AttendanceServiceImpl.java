@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.domain.entity.AttendanceEntity;
 import com.example.domain.entity.UserEntity;
-import com.example.enums.AttendanceType;
+import com.example.domain.enums.AttendanceType;
 import com.example.repository.AttendanceRepository;
 import com.example.repository.UserRepository;
 import com.example.service.AttendanceService;

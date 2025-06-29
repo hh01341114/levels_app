@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.domain.dto.AttendanceSummaryDto;
 import com.example.domain.entity.AttendanceSummaryEntity;
 import com.example.domain.entity.UserEntity;
-import com.example.enums.AttendanceType;
+import com.example.domain.enums.AttendanceType;
 import com.example.mapper.AttendanceSummaryMapper;
 import com.example.repository.AttendanceSummaryRepository;
 import com.example.service.AttendanceSummaryService;

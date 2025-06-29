@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.domain.entity.AttendanceEntity;
 import com.example.domain.entity.UserEntity;
-import com.example.enums.AttendanceType;
+import com.example.domain.enums.AttendanceType;
 
 /**
  * アテンダンスサービスクラス

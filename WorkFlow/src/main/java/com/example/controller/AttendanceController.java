@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.domain.dto.AttendanceSummaryDto;
 import com.example.domain.entity.AttendanceSummaryEntity;
 import com.example.domain.entity.UserEntity;
-import com.example.enums.AttendanceType;
+import com.example.domain.enums.AttendanceType;
 import com.example.mapper.AttendanceSummaryMapper;
 import com.example.service.AttendanceService;
 import com.example.service.AttendanceSummaryService;

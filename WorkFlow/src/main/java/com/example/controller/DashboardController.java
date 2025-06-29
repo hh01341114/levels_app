@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.domain.entity.UserEntity;
-import com.example.enums.AttendanceType;
+import com.example.domain.enums.AttendanceType;
 import com.example.service.AttendanceService;
 import com.example.service.UserService;
 
@@ -52,7 +52,6 @@ public class DashboardController {
 		model.addAttribute("breakIn", breakIn);
 		model.addAttribute("breakOut", breakOut);
 		
-		System.out.print(type);
 		// Thymeleafテンプレートに遷移
 		return "dashboard";
 	}

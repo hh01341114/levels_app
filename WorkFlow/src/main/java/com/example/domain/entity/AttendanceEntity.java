@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.enums.AttendanceType;
+import com.example.domain.enums.AttendanceType;
 
 import lombok.Data;
 import lombok.ToString;

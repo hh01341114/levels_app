@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.entity.UserEntity;
-import com.example.enums.Role;
+import com.example.domain.enums.Role;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 
