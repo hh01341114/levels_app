@@ -1,5 +1,6 @@
 package com.example.domain.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -42,6 +43,13 @@ public class AttendanceEntity {
 	private UserEntity userEntity;
 
 	private LocalDateTime at;
+	
+	/**
+	 * 日付
+	 * 打刻の追加更新用の日付
+	 */
+	@Column(name = "work_date", nullable = false)
+	private LocalDate workDate;
 
 	/*
 	 * 出退勤の値のリレーション 文字列型に変換する

@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -42,14 +43,29 @@ public class AttendanceServiceImpl implements AttendanceService {
 		Optional<UserEntity> option = userRepository.findById(userId);
 		UserEntity userEntity = option.orElse(null);
 		
-		//打刻情報（ユーザー、打刻種類、打刻時間）
-		AttendanceEntity attendanceEntity = new AttendanceEntity();
-		attendanceEntity.setUserEntity(userEntity);
-		attendanceEntity.setType(type);
-		attendanceEntity.setAt(LocalDateTime.now());
+		//打刻した日の日付を取得
+		LocalDate todayDate = LocalDate.now();
 		
-		//リポシトリに保存
-		attendanceRepository.save(attendanceEntity);
+		//ログインユーザーの打刻の状態を確認
+		Optional<AttendanceEntity> optional = attendanceRepository.findByUserEntityAndWorkDate(userEntity, todayDate);
+		
+		if (optional.isEmpty()) {
+			//打刻情報（ユーザー、打刻種類、打刻時間）
+			AttendanceEntity attendanceEntity = new AttendanceEntity();
+			attendanceEntity.setUserEntity(userEntity);
+			attendanceEntity.setType(type);
+			attendanceEntity.setAt(LocalDateTime.now());
+			attendanceEntity.setWorkDate(todayDate);
+			//リポシトリに保存
+			attendanceRepository.save(attendanceEntity);
+		} else {
+			AttendanceEntity apdAttendanceEntity = optional.get();
+			apdAttendanceEntity.setType(type);
+			apdAttendanceEntity.setAt(LocalDateTime.now());			
+			apdAttendanceEntity.setWorkDate(todayDate);
+			//リポシトリに保存
+			attendanceRepository.save(apdAttendanceEntity);
+		}
 		attendanceSummaryService.updateSummary(userEntity, type);
 	}
 	
