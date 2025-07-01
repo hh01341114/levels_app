@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.domain.entity.RequestEntity;
 import com.example.domain.entity.UserEntity;
 import com.example.domain.enums.RequestStatus;
+import com.example.form.RequestForm;
 
 public interface RequestService {
 	
@@ -21,4 +22,11 @@ public interface RequestService {
 	 * @return
 	 */
 	List<RequestEntity> getRequestsByStatus(RequestStatus status);
+	
+	/**
+	 * 有給申請情報取得
+	 * @param userEntity
+	 * @param requestForm
+	 */
+	void savePaidLeaveRequest(UserEntity userEntity, RequestForm requestForm);
 }

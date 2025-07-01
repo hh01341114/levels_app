@@ -65,6 +65,6 @@ public class RequestEntity {
 	@Column(name = "submitted_at")
 	private LocalDateTime submittedAt = LocalDateTime.now();
 	
-	@Column(columnDefinition = "TEXT")
+	@Column(name = "comment", columnDefinition = "TEXT")
 	private String comment;
 }

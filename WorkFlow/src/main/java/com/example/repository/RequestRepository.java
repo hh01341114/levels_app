@@ -13,7 +13,7 @@ import com.example.domain.enums.RequestStatus;
 public interface RequestRepository extends JpaRepository<RequestEntity, Integer> {
 	
 	/**
-	 * ログインユーザー申請
+	 * ログインユーザーの申請
 	 * @param userEntity
 	 * @return
 	 */
