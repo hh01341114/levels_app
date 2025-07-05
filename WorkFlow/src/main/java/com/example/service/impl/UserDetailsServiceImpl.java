@@ -11,20 +11,20 @@ import com.example.service.UserService;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
+	
 	@Autowired
 	private UserService userService;
-
+	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		UserEntity user = userService.getLoginUser(email);
 		if (user == null) {
 			throw new UsernameNotFoundException("Not found: " + email);
 		}
-
+		
 		// Roleが Enum型の場合、toString()がROLE_GENERALなどを返しているか確認
 		String role = "ROLE_" + user.getRole().name();
-
+		
 		return User.builder()
 				.username(user.getEmail())
 				.password(user.getPassword())

@@ -14,47 +14,57 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.domain.enums.AttendanceType;
+import com.example.domain.enums.RequestKind;
+import com.example.domain.enums.RequestStatus;
 
 import lombok.Data;
-import lombok.ToString;
 
 /**
- * 勤務情報（attendanceテーブル）を定義する
+ * Requestsテーブルのエンティティクラス
+ * 有給申請用
  */
 @Data
-@ToString(exclude = "userEntity")
 @Entity
-@Table(name = "attendance")
-public class AttendanceEntity {
-
+@Table(name = "requests")
+public class RequestEntity {
 	/**
-	 * usersテーブルの主キーを定義
+	 * 主キー(id)
+	 * user_idとの紐付け
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	/**
-	 * UserEntityとのリレーション (外部キーにid)を設定
-	 */
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private UserEntity userEntity;
-
-	private LocalDateTime at;
 	
 	/**
-	 * 日付
-	 * 打刻の追加更新用の日付
-	 */
-	@Column(name = "work_date", nullable = false)
-	private LocalDate workDate;
-
-	/*
-	 * 出退勤の値のリレーション 文字列型に変換する
+	 * 有給申請
 	 */
 	@Enumerated(EnumType.STRING)
-	@Column(name = "type")
-	private AttendanceType type;
+	@Column(name = "kind")
+	private RequestKind kind;
+	
+	/**
+	 * 申請状況
+	 */
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private RequestStatus status;
+	
+	/**
+	 * 申請対象日
+	 */
+	@Column(name = "target_date")
+	private LocalDate targetDate;
+	
+	/**
+	 * 申請日
+	 */
+	@Column(name = "submitted_at")
+	private LocalDateTime submittedAt = LocalDateTime.now();
+	
+	@Column(name = "comment", columnDefinition = "TEXT")
+	private String comment;
 }

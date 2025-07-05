@@ -2,8 +2,6 @@ package com.example.domain.entity;
 
 import java.util.List;
 
-import com.example.enums.Role;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.example.domain.enums.Role;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -21,7 +22,7 @@ import lombok.ToString;
  * MYSQLのusersテーブルとマッピングされる
  */
 @Data
-@ToString(exclude = "attendanceList") 
+@ToString(exclude = "attendanceList")
 @Entity
 @Table(name="users")
 public class UserEntity {

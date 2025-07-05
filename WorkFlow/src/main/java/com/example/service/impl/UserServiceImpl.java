@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.entity.UserEntity;
-import com.example.enums.Role;
+import com.example.domain.enums.Role;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 *ユーザー更新
+	 * ユーザー更新
 	 */
 	@Transactional
 	@Override
@@ -92,4 +92,5 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = optional.orElse(null);
 		return userEntity;
 	}
+
 }

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.domain.dto.AttendanceSummaryDto;
 import com.example.domain.entity.AttendanceSummaryEntity;
 import com.example.domain.entity.UserEntity;
-import com.example.enums.AttendanceType;
+import com.example.domain.enums.AttendanceType;
 import com.example.mapper.AttendanceSummaryMapper;
 import com.example.service.AttendanceService;
 import com.example.service.AttendanceSummaryService;
@@ -63,13 +64,35 @@ public class AttendanceController {
 		return "redirect:/dashboard";
 	}
 	
+	/**
+	 * 勤怠情報の取得
+	 * @param userDetails
+	 * @param year
+	 * @param month
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/history")
-	public String getHistory(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+	public String getHistory(
+			@AuthenticationPrincipal UserDetails userDetails, 
+			@RequestParam(required = false) Integer year,
+			@RequestParam(required = false) Integer month, 
+			Model model) {
+		
+		//EmailからUserEntityを取得
 		String email = userDetails.getUsername();
 		UserEntity loginUser = userService.getLoginUser(email);
 		
+		//年月の取得
+		LocalDate nowDate = LocalDate.now();
+		int targetYear = (year != null) ? year : nowDate.getYear();
+		int targetMonth = (month != null) ? month : nowDate.getMonthValue();
+		
+		LocalDate startMonth = LocalDate.of(targetYear, targetMonth, 1);
+		LocalDate endMonth = startMonth.withDayOfMonth(startMonth.lengthOfMonth());
+		
 		//勤怠サマリーの取得
-		List<AttendanceSummaryEntity> summaryList = summaryService.getSummaryByUser(loginUser);
+		List<AttendanceSummaryEntity> summaryList = summaryService.getSummaryByUser(loginUser, startMonth, endMonth);
 		
 		//DTOに変換（リスト形式）
 		List<AttendanceSummaryDto> dtoList = summaryList.stream()
@@ -78,28 +101,41 @@ public class AttendanceController {
 		
 		dtoList.forEach(dto -> System.out.println("DTO: " + dto));
 		
+		//モデルに渡す
 		model.addAttribute("history", dtoList);
+		model.addAttribute("targetYear", targetYear);
+		model.addAttribute("targetMonth", targetMonth);
 		
 		return "attendance/history";
 	}
 	
 	@GetMapping("/history/csv")
 	public void exportCsv(
-			@AuthenticationPrincipal UserDetails userDetails,
+			@AuthenticationPrincipal UserDetails userDetails, 
+			@RequestParam(required = false) Integer year,
+			@RequestParam(required = false) Integer month, 
 			HttpServletResponse response
 	) throws IOException {
-		
-		//文字コードの指定
-		response.setContentType("text/csv; charset=UTF-8");
-		//ファイルの指定
-		response.setHeader("Content-Disposition", "attachment; filename=\"attendance_history.csv\"");
 		
 		//ログインユーザーの取得
 		String email = userDetails.getUsername();
 		UserEntity user = userService.getLoginUser(email);
 		
+		//年月の取得
+		LocalDate nowDate = LocalDate.now();
+		int targetYear = (year != null) ? year : nowDate.getYear();
+		int targetMonth = (month != null) ? month : nowDate.getMonthValue();
+		
+		LocalDate startMonth = LocalDate.of(targetYear, targetMonth, 1);
+		LocalDate endMonth = startMonth.withDayOfMonth(startMonth.lengthOfMonth());
+		
 		//勤怠履歴の取得
-		List<AttendanceSummaryDto> summaries = summaryService.getSummaryDtoByUser(user);
+		List<AttendanceSummaryDto> summaries = summaryService.getSummaryDtoByUser(user, startMonth, endMonth);
+		
+		//文字コードの指定
+		response.setContentType("text/csv; charset=UTF-8");
+		//ファイルの指定
+		response.setHeader("Content-Disposition", "attachment; filename=\"attendance_history.csv\"");
 		
 		PrintWriter writer = response.getWriter();
 		writer.println("日付,出勤時間,退勤時間,実働時間,休憩時間");

@@ -65,7 +65,7 @@ public class UserDetailController {
 	@PostMapping(value = "/detail", params = "delete")
 	public String deleteUser(UserDetailForm form, Model model) {
 		userService.deleteByEmail(form.getEmail());
-
+		
 		return "redirect:/user/dashboard";
 	}
 }

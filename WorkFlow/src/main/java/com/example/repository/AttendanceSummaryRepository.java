@@ -25,9 +25,11 @@ public interface AttendanceSummaryRepository extends JpaRepository<AttendanceSum
 	Optional<AttendanceSummaryEntity> findByUserAndWorkDate(UserEntity userEntity, LocalDate workDate);
 	
 	/**
-	 * 指定したユーザーの勤怠サマリ情報を、勤務日の降順で全件取得する
+	 * 指定した月の勤怠サマリ情報を、勤務日の昇順で取得する
 	 * @param userEntity
 	 * @return
 	 */
-	List<AttendanceSummaryEntity> findByUserOrderByWorkDateDesc(UserEntity userEntity);
+	List<AttendanceSummaryEntity> findByUserAndWorkDateBetweenOrderByWorkDateAsc(
+			UserEntity userEntity, LocalDate startMonth, LocalDate endMonth
+		);
 }
