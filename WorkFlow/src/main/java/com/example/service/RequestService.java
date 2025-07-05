@@ -29,4 +29,26 @@ public interface RequestService {
 	 * @param requestForm
 	 */
 	void savePaidLeaveRequest(UserEntity userEntity, RequestForm requestForm);
+	
+	/**
+	 * 有給申請一覧を取得
+	 * @param userEntity
+	 * @return
+	 */
+	List<RequestEntity> getUserPaidLeaveRequests(UserEntity userEntity);
+	
+	/**
+	 * 勤務修正一覧取得
+	 * @param userEntity
+	 * @return
+	 */
+	List<RequestEntity> getUserCorrectionRequests(UserEntity userEntity);
+	
+	/**
+	 * 勤務修正を取得
+	 * @param userEntity
+	 * @param requestForm
+	 */
+	void saveCorrectionRequest(UserEntity userEntity, RequestForm requestForm);
+	
 }

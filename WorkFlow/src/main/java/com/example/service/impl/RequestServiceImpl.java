@@ -39,6 +39,9 @@ public class RequestServiceImpl implements RequestService {
 		return requestRepository.findByStatus(status);
 	}
 	
+	/**
+	 *有給申請リスト取得
+	 */
 	@Override
 	public void savePaidLeaveRequest(UserEntity userEntity, RequestForm requestForm) {
 		//有給申請新規作成
@@ -52,5 +55,31 @@ public class RequestServiceImpl implements RequestService {
 		requestEntity.setComment(requestForm.getComment());
 		
 		requestRepository.save(requestEntity);
+	}
+	
+	@Override
+	public List<RequestEntity> getUserPaidLeaveRequests(UserEntity userEntity) {
+		return requestRepository.findByUserEntityAndKind(userEntity, RequestKind.PAID_LEAVE);
+	}
+	
+	/**
+	 *勤怠修正リスト取得
+	 */
+	@Override
+	public void saveCorrectionRequest(UserEntity userEntity, RequestForm requestForm) {
+		RequestEntity requestEntity = new RequestEntity();
+		
+		requestEntity.setUserEntity(userEntity);
+		requestEntity.setKind(RequestKind.CORRECTION);
+		requestEntity.setStatus(RequestStatus.PENDING);
+		requestEntity.setTargetDate(requestForm.getTargetDate());
+		requestEntity.setSubmittedAt(LocalDateTime.now());
+		requestEntity.setComment(requestForm.getComment()); 
+		
+		requestRepository.save(requestEntity);
+	}
+	@Override
+	public List<RequestEntity> getUserCorrectionRequests(UserEntity userEntity) {
+		return requestRepository.findByUserEntityAndKind(userEntity, RequestKind.CORRECTION);
 	}
 }
