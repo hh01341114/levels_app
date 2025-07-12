@@ -29,6 +29,14 @@ public interface UserService {
 	 * @param email
 	 */
 	public UserEntity getUserOne(String email);
+	
+	/**
+	 * IDでユーザーを1件取得
+	 * 
+	 * @param id
+	 * @return ユーザー情報
+	 */
+	public UserEntity getUserById(Integer id);
 
 	/**
 	 * ユーザー更新

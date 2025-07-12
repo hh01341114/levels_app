@@ -51,4 +51,10 @@ public interface RequestService {
 	 */
 	void saveCorrectionRequest(UserEntity userEntity, RequestForm requestForm);
 	
+	/**
+	 * 承認用ユーザー申請一覧取得
+	 * @return
+	 */
+	List<UserEntity> findDistinctUsersWithRequests();
+	
 }

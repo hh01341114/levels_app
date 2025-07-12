@@ -6,7 +6,7 @@
 	<body>
 		<div layout:fragment="header">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-				<a class="navbar-brand text-white" th:href="@{/user/dashboard}">WorkFlow</a>
+				<a class="navbar-brand text-white" th:href="@{/dashboard}">WorkFlow</a>
 				
 				<div class="collapse navbar-collapse">
 					<ul class="navbar-nav me-auto">
@@ -31,7 +31,7 @@
 							<a class="nav-link" th:href="@{'/admin/calendar'}">カレンダー管理</a>
 						</li>
 						<li class="nav-item" sec:authorize="hasRole('ADMIN')">
-							<a class="nav-link" th:href="@{'/admin/approval'}">申請管理</a>
+							<a class="nav-link" th:href="@{'/approvals/list'}">申請承認管理</a>
 						</li>
 					</ul>
 					<!-- ログアウトボタン -->

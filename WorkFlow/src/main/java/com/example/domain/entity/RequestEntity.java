@@ -2,6 +2,7 @@ package com.example.domain.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.domain.enums.RequestKind;
@@ -65,6 +67,16 @@ public class RequestEntity {
 	@Column(name = "submitted_at")
 	private LocalDateTime submittedAt = LocalDateTime.now();
 	
+	/**
+	 * 申請理由
+	 */
 	@Column(name = "comment", columnDefinition = "TEXT")
 	private String comment;
+	
+	/**
+	 * approvalsEntityとのリレーション
+	 */
+	@OneToMany(mappedBy = "request")
+	private List<ApprovalsEntity> approvalsList;
+	
 }
