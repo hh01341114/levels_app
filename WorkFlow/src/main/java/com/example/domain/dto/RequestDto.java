@@ -7,7 +7,6 @@ import com.example.domain.entity.RequestEntity;
 import com.example.domain.enums.RequestKind;
 import com.example.domain.enums.RequestStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
