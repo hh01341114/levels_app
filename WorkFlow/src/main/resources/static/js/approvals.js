@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			const userName = item.textContent;
 			const userId = item.getAttribute("data-userid");
 
+			//詳細パネル表示
+			document.getElementById("user-detail").style.display = "block";
+
 			fetch("/approvals/user-requests?id=" + userId)
 				.then(response => {
 					if (!response.ok) {
@@ -22,12 +25,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 					// 例: 申請の内容を一覧で表示（仮）
 					const requestList = document.getElementById("request-list");
-					requestList.innerHTML = ""; 
+					requestList.innerHTML = "";
 
 					data.forEach(request => {
 						const li = document.createElement("li");
-						li.textContent = `申請種別: ${request.kindLabel}, 対象日: ${request.targetDate}, 提出日: ${request.submittedAt}`;
+						li.innerHTML = `申請種別: ${request.kindLabel}, 対象日: ${request.targetDate}, 提出日: ${request.submittedAt}
+						<form action="/approvals/approve" method="post" style="display:inline;">
+							<input type="hidden" name="requestId" value="${request.id}" />
+							<button type="submit" name="decision" value="APPROVED">承認</button>
+							<button type="submit" name="decision" value="REJECTED">却下</button>
+							<button type="submit" name="decision" value="REMAND">差し戻し</button>
+						</form>`;
 						requestList.appendChild(li);
+
+						li.addEventListener("click", function() {
+							document.getElementById("requestId").value = request.id;
+						});
 					});
 				})
 				.catch(error => {

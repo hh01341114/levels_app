@@ -11,21 +11,23 @@
 <body layout:fragment="content">
 	<!--ユーザー一覧表示-->
 	<div class="container" style="display: flex;">
+		<div th:if="${message}" style="color: green; font-weight: bold; margin-bottom: 10px;">
+			<p th:text="${message}">承認メッセージ表示</p>
+		</div>
 		<ul>
 			<li th:each="user : ${userList}" th:attr="data-userid=${user.id}" class="user-item"
-				　style="cursor: pointer;">
+				style="cursor: pointer;">
 				<span th:text="${user.name}">ユーザー名</span>
 			</li>
 		</ul>
-	</div>
 
-	<!--HTML右側-->
-	<div id="user-detail" style="margin-left: 40px; width: 100%;">
-		<h2>申請詳細</h2>
-		<table style="margin-left: 20px;">
-			<h3 id="detail-name">名前:</h3>
+		<!--HTML右側-->
+		<div id="user-detail" style="display: none; margin-left: 40px; width: 100%;">
+			<h2>申請詳細</h2>
+			<h3 id="detail-name">ユーザー名:</h3>
+			<!-- 申請リスト -->
 			<ul id="request-list"></ul>
-		</table>
+		</div>
 	</div>
 </body>
 
