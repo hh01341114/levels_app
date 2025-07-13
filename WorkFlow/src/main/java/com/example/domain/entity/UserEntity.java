@@ -61,4 +61,11 @@ public class UserEntity {
 	 */
 	@OneToMany(mappedBy = "userEntity")
 	private List<AttendanceEntity> attendanceList;
+	
+	/**
+	 * ApprovalsEntityとのリレーション
+	 * 申請者IDの紐付け
+	 */
+	@OneToMany(mappedBy = "approver")
+	private List<ApprovalsEntity> approvalsList;
 }

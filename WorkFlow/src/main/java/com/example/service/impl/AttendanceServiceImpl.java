@@ -78,11 +78,19 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return attendanceRepository.findByUserEntityIdOrderByAtDesc(userEntity);
 	}
 	
+	/**
+	 *ログインユーザーの取得
+	 *打刻初期値設定
+	 */
 	@Override
 	public AttendanceType getLoginUserType(Integer userId) {
 		AttendanceEntity attendanceEntity = attendanceRepository.findFirstByUserEntityIdOrderByAtDesc(userId);
+		
+		if(attendanceEntity == null || attendanceEntity.getType() == null) {
+			return AttendanceType.OUT;
+		} else {
 			AttendanceType type = attendanceEntity.getType();
-			
 			return type;
+		}
 	}
 }

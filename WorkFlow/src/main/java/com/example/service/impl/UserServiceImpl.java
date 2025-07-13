@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +43,21 @@ public class UserServiceImpl implements UserService {
 		}
 
 		userEntity.setRole(Role.GENERAL);
+		userEntity.setId(null);
 
 		String rawPassword = userEntity.getPassword();
 		userEntity.setPassword(encoder.encode(rawPassword));
 
 		userRepository.save(userEntity);
+	}
+
+	/**
+	 *ユーザー１件取得
+	 *userId参照にして
+	 */
+	@Override
+	public UserEntity getUserById(Integer id) {
+		return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません"));
 	}
 
 	/**

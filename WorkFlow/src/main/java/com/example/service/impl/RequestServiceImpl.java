@@ -82,4 +82,12 @@ public class RequestServiceImpl implements RequestService {
 	public List<RequestEntity> getUserCorrectionRequests(UserEntity userEntity) {
 		return requestRepository.findByUserEntityAndKind(userEntity, RequestKind.CORRECTION);
 	}
+	
+	/**
+	 *承認用のユーザー申請一覧を取得する
+	 */
+	@Override
+	public List<UserEntity> findDistinctUsersWithPendingRequests() {
+		return requestRepository.findDistinctUsersByStatus(RequestStatus.PENDING);
+	}
 }
