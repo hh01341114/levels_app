@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<title>申請承認画面</title>
+	<link rel="stylesheet" th:href="@{/css/user/list.css}">
+	<script th:src="@{/js/approvals.js}" defer></script>
+</head>
+
+<body layout:fragment="content">
+	<!--ユーザー一覧表示-->
+	<div class="container" style="display: flex;">
+		<div th:if="${message}" style="color: green; font-weight: bold; margin-bottom: 10px;">
+			<p th:text="${message}">承認メッセージ表示</p>
+		</div>
+		<ul>
+			<li th:each="user : ${userList}" th:attr="data-userid=${user.id}" class="user-item"
+				style="cursor: pointer;">
+				<span th:text="${user.name}">ユーザー名</span>
+			</li>
+		</ul>
+
+		<!--HTML右側-->
+		<div id="user-detail" style="display: none; margin-left: 40px; width: 100%;">
+			<h2>申請詳細</h2>
+			<h3 id="detail-name">ユーザー名:</h3>
+			<!--申請フィルター-->
+			<select id="status-filter">
+				<option value="PENDING">未承認</option>
+				<option value="APPROVED">承認済</option>
+				<option value="REJECTED">却下済</option>
+				<option value="REMAND">差し戻し</option>
+			</select>
+			<!-- 申請リスト -->
+			<div id="request-list"></div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+	</head>
+	
+	<body>
+		<div layout:fragment="header">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+				<a class="navbar-brand text-white" th:href="@{/dashboard}">WorkFlow</a>
+				
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav me-auto">
+						<!--共通リンク-->
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{'/dashboard'}">ダッシュボード</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{'/user/detailview/' + ${user.email}}">ユーザー詳細</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{'/attendance/history'}">勤怠履歴確認</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{'/requests/kind'}">各種申請</a>
+						</li>
+						<!--管理者専用リンク-->
+						<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+							<a class="nav-link" th:href="@{'/admin/userlist'}">ユーザー管理</a>
+						</li>
+						<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+							<a class="nav-link" th:href="@{'/admin/calendar'}">カレンダー管理</a>
+						</li>
+						<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+							<a class="nav-link" th:href="@{'/approvals/list'}">申請承認管理</a>
+						</li>
+					</ul>
+					<!-- ログアウトボタン -->
+					<form th:action="@{/logout}" method="post" class="ms-auto">
+						<button type="submit" class="btn btn-outline-light">ログアウト</button>
+					</form>
+				</div>
+			</nav>
+		</div>
+	</body>
+</html>

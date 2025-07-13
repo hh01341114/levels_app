@@ -1,6 +1,4 @@
 package com.example.domain.entity;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -14,47 +12,50 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.domain.enums.AttendanceType;
+import com.example.domain.enums.ApprovalsDecision;
 
 import lombok.Data;
-import lombok.ToString;
+
 
 /**
- * 勤務情報（attendanceテーブル）を定義する
+ * 承認用エンティティ
  */
 @Data
-@ToString(exclude = "userEntity")
 @Entity
-@Table(name = "attendance")
-public class AttendanceEntity {
-
+@Table(name = "approvals")
+public class ApprovalsEntity {
+	
 	/**
-	 * usersテーブルの主キーを定義
+	 * 主キー（id）
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
 	/**
 	 * UserEntityとのリレーション (外部キーにid)を設定
 	 */
 	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private UserEntity userEntity;
-
-	private LocalDateTime at;
+	@JoinColumn(name = "request_id", referencedColumnName = "id")
+	private RequestEntity request;
 	
 	/**
-	 * 日付
-	 * 打刻の追加更新用の日付
+	 * 承認者idS
 	 */
-	@Column(name = "work_date", nullable = false)
-	private LocalDate workDate;
-
-	/*
-	 * 出退勤の値のリレーション 文字列型に変換する
+	@ManyToOne
+	@JoinColumn(name = "approver_id", referencedColumnName = "id")
+	private UserEntity approver;
+	
+	/**
+	 * 管理者用承認権限
 	 */
 	@Enumerated(EnumType.STRING)
-	@Column(name = "type")
-	private AttendanceType type;
+	@Column(name = "decision")
+	private ApprovalsDecision decision;
+	
+	/**
+	 * 承認アクションの時間
+	 */
+	@Column(name = "decided_at", nullable = false)
+	private LocalDateTime decidedAt;
 }
