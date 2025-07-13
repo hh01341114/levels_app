@@ -25,6 +25,13 @@
 		<div id="user-detail" style="display: none; margin-left: 40px; width: 100%;">
 			<h2>申請詳細</h2>
 			<h3 id="detail-name">ユーザー名:</h3>
+			<!--申請フィルター-->
+			<select id="status-filter">
+				<option value="PENDING">未承認</option>
+				<option value="APPROVED">承認済</option>
+				<option value="REJECTED">却下済</option>
+				<option value="ALL">すべて</option>
+			</select>
 			<!-- 申請リスト -->
 			<ul id="request-list"></ul>
 		</div>

@@ -10,6 +10,7 @@ import com.example.domain.entity.ApprovalsEntity;
 import com.example.domain.entity.RequestEntity;
 import com.example.domain.entity.UserEntity;
 import com.example.domain.enums.ApprovalsDecision;
+import com.example.domain.enums.RequestStatus;
 import com.example.repository.ApprovalsRepository;
 import com.example.repository.RequestRepository;
 import com.example.service.ApprovalsService;
@@ -56,11 +57,24 @@ public class ApprovalsServiceImpl implements ApprovalsService {
 		approval.setDecision(ApprovalsDecision.valueOf(decision));
 		approval.setDecidedAt(LocalDateTime.now());
 		approval.setApprover(loginUser);
-		
-		//Requestのステータス更新
-		request.setStatus(Enum.valueOf(com.example.domain.enums.RequestStatus.class, decision));
-		requestRepository.save(request);
 
 		approvalsRepository.save(approval);
+
+		// Requestのステータス更新
+		switch (decision) {
+		case "APPROVED":
+			request.setStatus(RequestStatus.APPROVED);
+			break;
+		case "REJECTED":
+			request.setStatus(RequestStatus.REJECTED);
+			break;
+		case "REMAND":
+			request.setStatus(RequestStatus.REMAND);
+			break;
+		default:
+			throw new IllegalArgumentException("無効なdecision値: " + decision);
+		}
+		requestRepository.save(request);
+
 	}
 }
