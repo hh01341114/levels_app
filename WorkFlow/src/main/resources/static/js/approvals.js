@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	// 絞り込みロジック（初期表示含む）
 	function applyFilter(status) {
-		document.querySelectorAll("#request-list li").forEach(li => {
-			const liStatus = li.getAttribute("data-status");
-			li.style.display = (liStatus === status) ? "block" : "none";
+		document.querySelectorAll("#request-list table").forEach(table => {
+			const tableStatus = table.getAttribute("data-status");
+			table.style.display = (tableStatus === status) ? "block" : "none";
 		});
 	}
 
@@ -38,23 +38,32 @@ document.addEventListener("DOMContentLoaded", function() {
 					requestList.innerHTML = "";
 
 					data.forEach(request => {
-						const li = document.createElement("li");
-						li.setAttribute("data-status", request.status);
+						const table = document.createElement("table");
+						table.classList.add("request-table");
+						table.setAttribute("data-status", request.status);
 
-						li.innerHTML = `
-							申請種別: ${request.kindLabel}, 対象日: ${request.targetDate}, 提出日: ${request.submittedAt}
-							${request.status === "PENDING" ? `
-							<form action="/approvals/approve" method="post" style="display:inline;">
-								<input type="hidden" name="requestId" value="${request.id}" />
-								<button type="submit" name="decision" value="APPROVED">承認</button>
-								<button type="submit" name="decision" value="REJECTED">却下</button>
-								<button type="submit" name="decision" value="REMAND">差し戻し</button>
-							</form>` : `<span>処理済: ${request.status}</span>`}
+						table.innerHTML = `
+							<tr><th>申請種別</th><td>${request.kindLabel}</td></tr>
+							<tr><th>対象日</th><td>${request.targetDate}</td></tr>
+							<tr><th>提出日</th><td>${request.submittedAt}</td></tr>
+							<tr><th>ステータス</th><td>${request.status}</td></tr>
+							<tr>
+								<th>操作</th>
+								<td>
+									${request.status === "PENDING" ? `
+									<form action="/approvals/approve" method="post" style="display:inline;">
+										<input type="hidden" name="requestId" value="${request.id}" />
+										<button type="submit" name="decision" value="APPROVED">承認</button>
+										<button type="submit" name="decision" value="REJECTED">却下</button>
+										<button type="submit" name="decision" value="REMAND">差し戻し</button>
+									</form>` : `<span>処理済: ${request.status}</span>`}
+								</td>
+							</tr>
 						`;
 
-						requestList.appendChild(li);
+						requestList.appendChild(table);
 
-						li.addEventListener("click", function() {
+						table.addEventListener("click", function() {
 							document.getElementById("requestId").value = request.id;
 						});
 					});
