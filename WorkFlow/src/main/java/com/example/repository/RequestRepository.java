@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.entity.RequestEntity;
@@ -36,11 +37,7 @@ public interface RequestRepository extends JpaRepository<RequestEntity, Integer>
 	 */
 	List<RequestEntity> findByUserEntityAndKind(UserEntity userEntity, RequestKind requestKind);
 	
-	/**
-	 * 承認画面用ユーザーリスト表示
-	 * 重複を除く
-	 * @return
-	 */
-	@Query("SELECT DISTINCT r.userEntity FROM RequestEntity r")
-	List<UserEntity> findDistinctUsersWithRequests();
+	
+	@Query("SELECT DISTINCT r.userEntity FROM RequestEntity r WHERE r.status = :status")
+	List<UserEntity> findDistinctUsersByStatus(@Param("status") RequestStatus status);
 }

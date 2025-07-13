@@ -87,7 +87,7 @@ public class RequestServiceImpl implements RequestService {
 	 *承認用のユーザー申請一覧を取得する
 	 */
 	@Override
-	public List<UserEntity> findDistinctUsersWithRequests() {
-		return requestRepository.findDistinctUsersWithRequests();
+	public List<UserEntity> findDistinctUsersWithPendingRequests() {
+		return requestRepository.findDistinctUsersByStatus(RequestStatus.PENDING);
 	}
 }

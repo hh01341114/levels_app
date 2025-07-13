@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.domain.dto.RequestDto;
 import com.example.domain.entity.RequestEntity;
 import com.example.domain.entity.UserEntity;
+import com.example.domain.enums.RequestStatus;
 import com.example.service.ApprovalsService;
 import com.example.service.RequestService;
 import com.example.service.UserService;
@@ -50,7 +51,7 @@ public class ApprovalsController {
 		UserEntity loginUser = userService.getLoginUser(email);
 
 		// 全ユーザーの申請を取得表示
-		List<UserEntity> userList = requestService.findDistinctUsersWithRequests();
+		List<UserEntity> userList = requestService.findDistinctUsersWithPendingRequests();
 
 		// modelに渡す
 		model.addAttribute("userList", userList);
