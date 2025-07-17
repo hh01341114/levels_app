@@ -8,14 +8,6 @@ import com.example.domain.entity.UserEntity;
  * ユーザー情報に関するビジネスロジックを定義するサービスインターフェース
  */
 public interface UserService {
-
-	/**
-	 * ユーザー登録
-	 * 
-	 * @param userEntity
-	 */
-	public void signup(UserEntity userEntity);
-
 	/**
 	 * ユーザー取得
 	 * 
@@ -29,7 +21,7 @@ public interface UserService {
 	 * @param email
 	 */
 	public UserEntity getUserOne(String email);
-	
+
 	/**
 	 * IDでユーザーを1件取得
 	 * 
@@ -46,13 +38,14 @@ public interface UserService {
 	 * @param name
 	 */
 	public void updateUserOne(String email, String password, String name);
-
+	
 	/**
 	 * ユーザー削除
 	 * 
 	 * @param email
 	 */
 	public void deleteByEmail(String email);
+	
 
 	/**
 	 * ログインユーザー取得

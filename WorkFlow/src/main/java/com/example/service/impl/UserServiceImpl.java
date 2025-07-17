@@ -7,13 +7,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.entity.UserEntity;
-import com.example.domain.enums.Role;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 
@@ -27,33 +24,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private PasswordEncoder encoder;
-
 	/**
-	 * ユーザー登録
-	 */
-	@Transactional
-	@Override
-	public void signup(UserEntity userEntity) {
-		boolean exists = userRepository.existsByEmail(userEntity.getEmail());
-		if (exists) {
-			throw new DataAccessException("ユーザーが既に存在") {
-			};
-		}
-
-		userEntity.setRole(Role.GENERAL);
-		userEntity.setId(null);
-
-		String rawPassword = userEntity.getPassword();
-		userEntity.setPassword(encoder.encode(rawPassword));
-
-		userRepository.save(userEntity);
-	}
-
-	/**
-	 *ユーザー１件取得
-	 *userId参照にして
+	 * ユーザー１件取得 userId参照にして
 	 */
 	@Override
 	public UserEntity getUserById(Integer id) {
