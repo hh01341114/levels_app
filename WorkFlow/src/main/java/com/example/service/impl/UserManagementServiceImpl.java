@@ -61,7 +61,6 @@ public class UserManagementServiceImpl implements UserManagementService {
 	@Transactional
 	@Override
 	public void updateUserOne(String email, String password, String name, Integer departmentId) {
-
 	}
 
 	/**

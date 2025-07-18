@@ -37,7 +37,7 @@ public interface UserService {
 	 * @param password
 	 * @param name
 	 */
-	public void updateUserOne(String email, String password, String name);
+	public void updateUserOne(String email, String password, String name, Integer departmentId);
 	
 	/**
 	 * ユーザー削除

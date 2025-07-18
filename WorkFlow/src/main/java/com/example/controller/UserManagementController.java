@@ -47,7 +47,7 @@ public class UserManagementController {
 		
 		model.addAttribute("getList", getList);
 		
-		return "/user/managementlist";
+		return "user/managementlist";
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class UserManagementController {
 	@GetMapping("/signup")
 	public String getSignup(Model model, @ModelAttribute SignupForm form) {
 		// ユーザー登録画面に遷移
-		return "user/signup";
+		return "usermanagement/signup";
 	}
 
 	/**
@@ -84,6 +84,6 @@ public class UserManagementController {
 		userManagementService.signup(userEntity);
 
 		// ログイン画面にリダイレクト
-		return "redirect:/managementlist";
+		return "redirect:/usermanagement/userlist";
 	}
 }

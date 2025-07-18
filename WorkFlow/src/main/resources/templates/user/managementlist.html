@@ -4,8 +4,6 @@
 
 <head>
 	<title>ユーザー管理</title>
-	<link rel="stylesheet" href="@{/css/user/list.css}">
-	<script th:src="@{/js/user/detail.js}" defer></script>
 </head>
 
 <body>
@@ -16,18 +14,21 @@
 				<th class="th-width">ユーザー名</th>
 				<th class="th-width">所属</th>
 			</thead>
-			
 			<tbody>
 				<tr th:each="item: ${getList}">
 					<td th:text="${item.id}"></td>
 					<td th:text="${item.name}"></td>
 					<td th:text="${item.departmentId}"></td>
 					<td>
-						<a class="btn btn-primary" th:href="@{'/user/detail/' + ${item.email}}">詳細</a>
+						<a class="btn btn-primary" th:href="@{'/user/detail/' + ${item.email}}">ユーザー情報を編集する</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<!--ユーザー登録-->
+		<div class="text-center">
+			<a class="btn btn-primary" th:href="@{/usermanagement/signup}">ユーザーを登録する</a>
+		</div>
 	</div>
 
 </body>

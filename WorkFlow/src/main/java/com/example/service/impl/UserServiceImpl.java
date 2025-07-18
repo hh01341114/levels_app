@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.entity.UserEntity;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	PasswordEncoder encoder;
 
 	/**
 	 * ユーザー１件取得 userId参照にして
@@ -53,8 +57,17 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Transactional
 	@Override
-	public void updateUserOne(String email, String password, String name) {
+	public void updateUserOne(String email, String password, String name, Integer departmentId) {
+		// ユーザーの取得
+		UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("ユーザーが見つかりません"));
 
+		// 値を更新（必要ならパスワードを暗号化）
+		user.setPassword(encoder.encode(password));
+		user.setName(name);
+		user.setDepartmentId(departmentId);
+
+		// 保存（saveはUPDATEもINSERTも行う）
+		userRepository.save(user);
 	}
 
 	/**
