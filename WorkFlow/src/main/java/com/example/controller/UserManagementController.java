@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.domain.entity.UserEntity;
 import com.example.form.GroupOrder;
@@ -33,20 +34,30 @@ public class UserManagementController {
 
 	@Autowired
 	private UserManagementService userManagementService;
-	
+
 	/**
 	 * ユーザー一覧画面表示
+	 * 
 	 * @param model
 	 * @param userEntity
 	 * @return
 	 */
 	@GetMapping("/userlist")
-	public String getUserList(Model model) {
-		
-		List<UserEntity> getList = userManagementService.getUsers();
-		
+	public String getUserList(@RequestParam(required = false) Integer departmentId, Model model) {
+
+		List<UserEntity> getList;
+
+		if (departmentId != null) {
+			// 部署でフィルター
+			getList = userManagementService.getUsersByDepartment(departmentId);
+		} else {
+			// 全件取得
+			getList = userManagementService.getUsers();
+		}
+
 		model.addAttribute("getList", getList);
-		
+		model.addAttribute("departmentId", departmentId);
+
 		return "user/managementlist";
 	}
 

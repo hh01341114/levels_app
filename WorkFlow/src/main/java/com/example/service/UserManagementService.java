@@ -18,6 +18,13 @@ public interface UserManagementService {
 	public List<UserEntity> getUsers();
 	
 	/**
+	 * 部署idでユーザー取得
+	 * @param departmentId
+	 * @return
+	 */
+	List<UserEntity> getUsersByDepartment(Integer departmentId);
+	
+	/**
 	 * ユーザー登録
 	 * 
 	 * @param userEntity

@@ -52,6 +52,14 @@ public class UserManagementServiceImpl implements UserManagementService {
 	}
 
 	/**
+	 *部署で絞り込み
+	 */
+	@Override
+	public List<UserEntity> getUsersByDepartment(Integer departmentId) {
+		return userRepository.findByDepartmentId(departmentId);
+	}
+
+	/**
 	 * ユーザー更新
 	 * 
 	 * @param email
