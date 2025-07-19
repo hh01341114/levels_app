@@ -36,5 +36,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	 * @return
 	 */
 	List<UserEntity> findByDepartmentId(Integer departmentId);
+	
+	/**
+	 * ユーザーIdでユーザー検索
+	 * @param email
+	 * @return
+	 */
+	List<UserEntity>findByEmailContaining(String email);
 
 }

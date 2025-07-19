@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.domain.entity.UserEntity;
 import com.example.form.GroupOrder;
 import com.example.form.SignupForm;
+import com.example.form.UserDetailForm;
 import com.example.service.UserManagementService;
+import com.example.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,20 +45,25 @@ public class UserManagementController {
 	 * @return
 	 */
 	@GetMapping("/userlist")
-	public String getUserList(@RequestParam(required = false) Integer departmentId, Model model) {
+	public String getUserList(@RequestParam(required = false) String email,
+			@RequestParam(required = false) Integer departmentId, Model model) {
 
 		List<UserEntity> getList;
 
-		if (departmentId != null) {
-			// 部署でフィルター
+		if (email != null && !email.isEmpty()) {
+			// 部分一致でメール検索（検索が優先）
+			getList = userManagementService.findUsersByPartialName(email);
+		} else if (departmentId != null) {
+			// 部署IDで絞り込み
 			getList = userManagementService.getUsersByDepartment(departmentId);
 		} else {
-			// 全件取得
+			// 全件
 			getList = userManagementService.getUsers();
 		}
 
 		model.addAttribute("getList", getList);
 		model.addAttribute("departmentId", departmentId);
+		model.addAttribute("email", email);
 
 		return "user/managementlist";
 	}

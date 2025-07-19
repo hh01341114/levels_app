@@ -58,6 +58,15 @@ public class UserManagementServiceImpl implements UserManagementService {
 	public List<UserEntity> getUsersByDepartment(Integer departmentId) {
 		return userRepository.findByDepartmentId(departmentId);
 	}
+	
+	/**
+	 *  ユーザー検索
+	 * @param partialName
+	 * @return
+	 */
+	public List<UserEntity> findUsersByPartialName(String email) {
+		return userRepository.findByEmailContaining(email);
+		}
 
 	/**
 	 * ユーザー更新
