@@ -50,8 +50,11 @@ public class UserManagementController {
 
 		List<UserEntity> getList;
 
-		if (email != null && !email.isEmpty()) {
-			// 部分一致でメール検索（検索が優先）
+		if ((email != null && !email.isEmpty()) && departmentId != null) {
+			//部署id条件と検索
+			getList = userManagementService.findByEmailAndDepartment(email, departmentId);
+		} else if (email != null && !email.isEmpty()) {
+			// 部分一致でメール検索（検索優先）
 			getList = userManagementService.findUsersByPartialName(email);
 		} else if (departmentId != null) {
 			// 部署IDで絞り込み

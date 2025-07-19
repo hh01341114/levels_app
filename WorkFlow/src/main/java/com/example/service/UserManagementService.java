@@ -23,7 +23,7 @@ public interface UserManagementService {
 	 * @param departmentId
 	 * @return
 	 */
-	List<UserEntity> getUsersByDepartment(Integer departmentId);
+	public List<UserEntity> getUsersByDepartment(Integer departmentId);
 
 	/**
 	 * 入力したデータで検索
@@ -31,6 +31,15 @@ public interface UserManagementService {
 	 * @return
 	 */
 	public List<UserEntity> findUsersByPartialName(String email);
+	
+	/**
+	 * 部署Idと検索結果の反映
+	 * @param email
+	 * @param departmentId
+	 * @return
+	 */
+	public List<UserEntity> findByEmailAndDepartment(String email, Integer departmentId);
+	
 
 	/**
 	 * ユーザー登録
