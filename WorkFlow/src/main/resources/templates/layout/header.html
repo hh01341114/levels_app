@@ -25,7 +25,7 @@
 						</li>
 						<!--管理者専用リンク-->
 						<li class="nav-item" sec:authorize="hasRole('ADMIN')">
-							<a class="nav-link" th:href="@{'/admin/userlist'}">ユーザー管理</a>
+							<a class="nav-link" th:href="@{'/usermanagement/userlist'}">ユーザー管理</a>
 						</li>
 						<li class="nav-item" sec:authorize="hasRole('ADMIN')">
 							<a class="nav-link" th:href="@{'/admin/calendar'}">カレンダー管理</a>

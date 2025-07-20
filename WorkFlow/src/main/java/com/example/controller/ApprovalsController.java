@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.domain.dto.RequestDto;
 import com.example.domain.entity.RequestEntity;
 import com.example.domain.entity.UserEntity;
-import com.example.domain.enums.RequestStatus;
 import com.example.service.ApprovalsService;
 import com.example.service.RequestService;
 import com.example.service.UserService;
