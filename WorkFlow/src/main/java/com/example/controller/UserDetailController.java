@@ -57,15 +57,15 @@ public class UserDetailController {
 	 */
 	@PostMapping(value = "/detail", params = "update")
 	public String updateUser(UserDetailForm form, Model model) {
-		userService.updateUserOne(form.getEmail(), form.getPassword(), form.getName());
+		userService.updateUserOne(form.getEmail(), form.getPassword(), form.getName(), form.getDepartmentId());
 		
-		return "redirect:/user/dashboard";
+		return "redirect:/dashboard";
 	}
 	
 	@PostMapping(value = "/detail", params = "delete")
 	public String deleteUser(UserDetailForm form, Model model) {
 		userService.deleteByEmail(form.getEmail());
 		
-		return "redirect:/user/dashboard";
+		return "redirect:/dashboard";
 	}
 }

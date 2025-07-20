@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 
 <head>
 	<title>ユーザー詳細編集</title>
@@ -12,8 +13,9 @@
 		<div class="header border-bottom">
 			<h1 class="h2">ユーザー詳細編集画面</h1>
 		</div>
-		<form id="user-detail-form" method="post" class="form-signup" th:object="${userDetailForm}">
-			<input type="hidden" th:field="*{email}"/>
+		<form id="user-detail-form" method="post" class="form-signup" th:action="@{/user/detail}"
+			th:object="${userDetailForm}">
+			<input type="hidden" th:field="*{email}" />
 			<!--ユーザー詳細情報-->
 			<table class="table table-striped table-borderd table-hover">
 				<tbody>
@@ -24,38 +26,40 @@
 					<tr>
 						<th>パスワード</th>
 						<td>
-							<input type="password" class="form-control" th:field="*{password}"/>
+							<input type="password" class="form-control" th:field="*{password}" />
 						</td>
 					</tr>
 					<tr>
 						<th>ユーザー名</th>
 						<td>
-							<input type="text" class="form-control" th:field="*{name}"/>
+							<input type="text" class="form-control" th:field="*{name}" />
 						</td>
 					</tr>
-						<th>部署名</th>
+					<tr sec:authorize="hasRole('ADMIN')">
+						<th>部署名</thsec:authorize="hasAuthority('ADMIN')">
 						<td>
-							<input type="text" class="form-control" th:field="*{departmentId}"/>
+							<input type="text" class="form-control" th:field="*{departmentId}" />
 						</td>
 					</tr>
-					<tr>
+					<!--<tr sec:authorize="hasRole('ADMIN')">
 						<th>有給残日数</th>
 						<td>
 							<input type="text" class="form-control"/>
 						</td>
-					</tr>
+					</tr>-->
 				</tbody>
 			</table>
 			<!--ボタンエリア-->
 			<div class="text-center">
-				<button class="btn btn-danger" type="submit" name="delete">
+				<button class="btn btn-danger" type="submit" name="delete" value="delete" tr sec:authorize="hasRole('ADMIN')">
 					削除
 				</button>
-				<button class="btn btn-primary" type="submit" name="update">
+				<button class="btn btn-primary" type="submit" name="update" value="update">
 					更新
 				</button>
 			</div>
 		</form>
 	</div>
 </body>
+
 </html>

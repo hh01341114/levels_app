@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("Not found: " + email);
 		}
 		
-		// Roleが Enum型の場合、toString()がROLE_GENERALなどを返しているか確認
+		// Roleが ENUM型の場合、toString()がROLE_GENERALなどを返しているか確認
 		String role = "ROLE_" + user.getRole().name();
 		
 		return User.builder()
