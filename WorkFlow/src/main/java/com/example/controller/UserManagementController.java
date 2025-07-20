@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.domain.entity.UserEntity;
 import com.example.form.GroupOrder;
 import com.example.form.SignupForm;
-import com.example.form.UserDetailForm;
 import com.example.service.UserManagementService;
-import com.example.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
