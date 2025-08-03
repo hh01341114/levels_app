@@ -10,6 +10,10 @@ public enum CalendarEnum {
 	
 	private final String calendarLabel;
 	
+	/**
+	 * ステータス情報を日本語に変換
+	 * @param label
+	 */
 	private CalendarEnum(String label) {
 		this.calendarLabel = label;
 	}
