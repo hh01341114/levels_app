@@ -11,6 +11,8 @@ import com.example.domain.entity.RequestEntity;
 import com.example.domain.entity.UserEntity;
 import com.example.domain.enums.RequestKind;
 import com.example.domain.enums.RequestStatus;
+import java.time.LocalDate;
+
 
 @Repository
 public interface RequestRepository extends JpaRepository<RequestEntity, Integer> {
@@ -40,4 +42,6 @@ public interface RequestRepository extends JpaRepository<RequestEntity, Integer>
 	
 	@Query("SELECT DISTINCT r.userEntity FROM RequestEntity r WHERE r.status = :status")
 	List<UserEntity> findDistinctUsersByStatus(@Param("status") RequestStatus status);
+	
+	List<RequestEntity> findByUserEntityAndStatusAndKindAndTargetDateBetween(UserEntity userEntity, RequestStatus status, RequestKind kind, LocalDate startDate, LocalDate endDate);
 }

@@ -62,4 +62,5 @@ public interface PaidleavesService {
 	 * @param daysToDeduct
 	 */
 	void deductPaidLeaveDays(UserEntity userEntity, float daysToDeduct);
+	
 }

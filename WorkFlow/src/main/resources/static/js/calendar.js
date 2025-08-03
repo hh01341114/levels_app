@@ -10,9 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		events: {
 			url: 'api/calendar/events',
 			method: 'GET',
-			failure: function() {
-				alert('カレンダーの読み込みに失敗しました');
-			}
 		}
 
 	});
