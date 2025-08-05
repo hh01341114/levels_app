@@ -8,5 +8,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/calendar")
 public class CalendarManagementController {
 	
-	@GetMapping("/new")
 }
