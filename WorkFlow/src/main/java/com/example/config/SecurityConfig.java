@@ -32,9 +32,9 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests(authz -> authz
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-			.antMatchers("/h2-console/**").permitAll()
+			.requestMatchers("/h2-console/**").permitAll()
 			// ログイン不要のページ
-			.antMatchers("/login", "/user/signup").permitAll()
+			.requestMatchers("/login", "/user/signup").permitAll()
 			.anyRequest().authenticated()
 			
 			).formLogin(login -> login
