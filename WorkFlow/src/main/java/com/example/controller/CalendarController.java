@@ -58,7 +58,7 @@ public class CalendarController {
 		for (CalendarEntity clList : events) {
 			Map<String, Object> eventMap = new HashMap<>();
 			eventMap.put("title", clList.getEventTitle());
-			eventMap.put("start", clList.getEventDate().toString());
+			eventMap.put("start", clList.getStartDate().toString());
 			eventList.add(eventMap);
 		}
 

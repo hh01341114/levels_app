@@ -28,10 +28,16 @@ public class CalendarEntity {
 	private Integer id;
 
 	/**
-	 * イベントの日付
+	 * イベントの開始日
 	 */
-	@Column(name = "event_date", nullable = false)
-	private LocalDate eventDate;
+	@Column(name = "start_date", nullable = false)
+	private LocalDate startDate;
+	
+	/**
+	 * イベントの終了日
+	 */
+	@Column(name = "end_date", nullable = false)
+	private LocalDate endDate;
 	
 	/**
 	 * イベントの名称（祝日の名前とか）
