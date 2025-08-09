@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+	<title>カレンダー管理</title>
+	<link rel="stylesheet" th:href="@{/css/user/list.css}">
+	<script th:src="@{/js/paidleave.js}" defer></script>
+</head>
+
+<body layout:fragment="content">
+	<h2>カレンダー管理（登録）</h2>
+
+	<form th:action="@{/admin/calendar}" th:object="${calendarForm}" method="post">
+		<div>
+			<label>開始日</label>
+			<input type="date" th:field="*{startDate}" required>
+			<div th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
+		</div>
+
+		<div>
+			<label>終了日</label>
+			<input type="date" th:field="*{endDate}" required>
+			<div th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
+		</div>
+
+		<div>
+			<label>タイトル</label>
+			<input type="text" th:field="*{eventTitle}" placeholder="例: 夏季休暇" required>
+			<div th:if="${#fields.hasErrors('eventTitle')}" th:errors="*{eventTitle}"></div>
+		</div>
+
+		<div>
+			<label>種別</label>
+			<select th:field="*{eventType}">
+				<option th:each="t : ${T(com.example.domain.enums.CalendarEnum).values()}" th:value="${t}"
+					th:text="${t.label}">
+				</option>
+			</select>
+		</div>
+
+		<button type="submit">登録</button>
+	</form>
+</body>
+</html>

@@ -59,6 +59,9 @@ public class CalendarController {
 			Map<String, Object> eventMap = new HashMap<>();
 			eventMap.put("title", clList.getEventTitle());
 			eventMap.put("start", clList.getStartDate().toString());
+			// FullCalendarはendが「翌日」を期待（排他的）なので +1 日
+			eventMap.put("end", clList.getEndDate().plusDays(1).toString());
+			eventMap.put("allDay", true);
 			eventList.add(eventMap);
 		}
 
@@ -68,7 +71,7 @@ public class CalendarController {
 
 		// calendar.js用のリストに変換（有給）
 		List<RequestEntity> approvedList = requestService.getApprovedList(loginUser, startDate, endDate);
-		
+
 		for (RequestEntity reqListEntity : approvedList) {
 			Map<String, Object> reqEventMap = new HashMap<>();
 			reqEventMap.put("title", "有給休暇");
