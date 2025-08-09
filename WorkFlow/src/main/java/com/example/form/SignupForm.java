@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
@@ -43,6 +44,7 @@ public class SignupForm {
 	private Integer departmentId;
 
 	// 入社日
+	@NotNull(groups = ValidGroup1.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate joiningDate;
 }
