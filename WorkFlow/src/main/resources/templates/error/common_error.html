@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>エラー</title>
+</head>
+
+<body>
+	<h1>エラーが発生しました</h1>
+	<p th:text="${errorMessage}">予期せぬエラーが発生しました。</p>
+	<a th:href="@{/dashboard}">トップページへ戻る</a>
+</body>
+
+</html>

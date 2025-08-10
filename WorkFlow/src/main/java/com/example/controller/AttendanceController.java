@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +23,8 @@ import com.example.mapper.AttendanceSummaryMapper;
 import com.example.service.AttendanceService;
 import com.example.service.AttendanceSummaryService;
 import com.example.service.UserService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * アテンダンスコントローラー

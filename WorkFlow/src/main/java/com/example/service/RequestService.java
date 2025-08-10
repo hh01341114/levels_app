@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.example.domain.entity.RequestEntity;
@@ -63,5 +64,14 @@ public interface RequestService {
 	 * @return
 	 */
 	List<UserEntity> findDistinctUsersWithPendingRequests();
+	
+	/**
+	 * カレンダー用有給承認取得
+	 * @param userEntity
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	List<RequestEntity> getApprovedList(UserEntity userEntity, LocalDate startDate, LocalDate endDate);
 
 }

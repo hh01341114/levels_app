@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -89,5 +90,14 @@ public class RequestServiceImpl implements RequestService {
 	@Override
 	public List<UserEntity> findDistinctUsersWithPendingRequests() {
 		return requestRepository.findDistinctUsersByStatus(RequestStatus.PENDING);
+	}
+	
+	/**
+	 *カレンダー画面用
+	 *有給取得日情報取得
+	 */
+	@Override
+	public List<RequestEntity>getApprovedList(UserEntity userEntity, LocalDate startDate, LocalDate endDate) {
+		return requestRepository.findByUserEntityAndStatusAndKindAndTargetDateBetween(userEntity, RequestStatus.APPROVED, RequestKind.PAID_LEAVE, startDate, endDate);
 	}
 }
