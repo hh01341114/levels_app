@@ -1,5 +1,7 @@
 package com.example.form;
 
+import java.time.LocalDate;
+
 import com.example.domain.enums.DepartmentEnum;
 
 import lombok.Data;
@@ -26,6 +28,12 @@ public class UserDetailForm {
 	 * 部署名
 	 */
 	private Integer departmentId;
+	
+	
+	/**
+	 * 入社日
+	 */
+	private LocalDate joiningDate;
 
 	/**
 	 * 部署名（変換）

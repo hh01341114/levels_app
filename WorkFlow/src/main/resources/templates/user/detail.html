@@ -36,9 +36,17 @@
 						</td>
 					</tr>
 					<tr sec:authorize="hasRole('ADMIN')">
-						<th>部署名</thsec:authorize="hasAuthority('ADMIN')">
+						<th>部署名</th>
 						<td>
-							<input type="text" class="form-control" th:field="*{departmentName}" />
+							<select class="form-control" th:field="*{departmentId}">
+								<option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.label}">
+								</option>
+							</select>
+						</td>
+					<tr sec:authorize="hasRole('ADMIN')">
+						<th>入社日</th>
+						<td>
+							<input type="text" class="form-control" th:field="*{joiningDate}" />
 						</td>
 					</tr>
 				</tbody>
