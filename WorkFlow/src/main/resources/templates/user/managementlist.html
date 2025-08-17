@@ -34,7 +34,7 @@
 				<tr th:each="item: ${getList}">
 					<td th:text="${item.email}"></td>
 					<td th:text="${item.name}"></td>
-					<td th:text="${item.departmentId}"></td>
+					<td th:text="${item.departmentName}"></td>
 					<td>
 						<a class="btn btn-primary" th:href="@{'/user/detail/' + ${item.email}}">ユーザー情報を編集する</a>
 						<a class="btn btn-primary" th:href="@{'/attendancemanagement/history/' + ${item.email}}">勤怠履歴</a>

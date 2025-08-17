@@ -70,4 +70,10 @@ public interface PaidleavesService {
 	 */
 	float getRemainingDays(UserEntity user);
 	
+	/**
+	 * 全ユーザー有給取得
+	 * @return
+	 */
+	List<PaidleavesEntity> getAllPaidleaves();
+	
 }

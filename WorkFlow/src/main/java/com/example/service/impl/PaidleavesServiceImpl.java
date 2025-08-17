@@ -47,6 +47,15 @@ public class PaidleavesServiceImpl implements PaidleavesService {
 	}
 
 	/**
+	 *有給管理表示用
+	 *ユーザー有給情報
+	 */
+	@Override
+	public List<PaidleavesEntity> getAllPaidleaves() {
+		return paidleavesRepository.findAllByOrderByUserEntity_NameAscGrantDateAsc();
+	}
+
+	/**
 	 * ユーザーごとの有給取得
 	 */
 	public List<PaidleavesEntity> getPaidleavesByUser(UserEntity user) {
@@ -177,13 +186,12 @@ public class PaidleavesServiceImpl implements PaidleavesService {
 	}
 
 	/**
-	 *有給残日数計算
-	 *ユーザー詳細表示用
+	 * 有給残日数計算 ユーザー詳細表示用
 	 */
 	@Override
 	public float getRemainingDays(UserEntity user) {
 		LocalDate today = LocalDate.now();
-		List<PaidleavesEntity> active = paidleavesRepository.findByUserEntityAndRevocationDateAfter(user, today); // 失効前だけ対象
+		List<PaidleavesEntity> active = paidleavesRepository.findByUserEntityAndRevocationDateAfter(user, today);
 
 		float total = 0f;
 		for (PaidleavesEntity p : active) {
