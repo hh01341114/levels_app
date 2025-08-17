@@ -54,5 +54,12 @@ public interface UserService {
 	 * @param email
 	 */
 	public UserEntity getLoginUser(String email);
+	
+	/**
+	 * パスワード更新用
+	 * @param email
+	 * @param encodedPassword
+	 */
+	void updatePassword(String email, String encodedPassword);
 
 }

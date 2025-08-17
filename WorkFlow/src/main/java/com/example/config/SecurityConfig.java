@@ -29,25 +29,15 @@ public class SecurityConfig {
 
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-		.authorizeHttpRequests(authz -> authz
-			.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-			.requestMatchers("/h2-console/**").permitAll()
-			// ログイン不要のページ
-			.requestMatchers("/login", "/user/signup").permitAll()
-			.anyRequest().authenticated()
-			
-			).formLogin(login -> login
-			.loginProcessingUrl("/login")
-			.loginPage("/login")
-			.failureUrl("/login?error")
-			.usernameParameter("email")
-			.passwordParameter("password")
-			.defaultSuccessUrl("/dashboard", true)
-			.permitAll()
-		)
-		.csrf(csrf -> csrf.disable()); 
-		
+		http.authorizeHttpRequests(authz -> authz.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+				.permitAll().requestMatchers("/h2-console/**").permitAll()
+				// ログイン不要のページ
+				.requestMatchers("/login", "/user/signup", "/password/change").permitAll().anyRequest().authenticated()
+
+		).formLogin(login -> login.loginProcessingUrl("/login").loginPage("/login").failureUrl("/login?error")
+				.usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/dashboard", true)
+				.permitAll()).csrf(csrf -> csrf.disable());
+
 		return http.build();
 	}
 }

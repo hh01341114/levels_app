@@ -30,6 +30,12 @@
 				<label for="password" class="sr-only">パスワード</label>
 				<input type="password" class="form-control" placeholder="パスワード" name="password" />
 			</div>
+
+			<!-- パスワード変更画面 -->
+			<div style="margin-top: 10px;">
+				<a th:href="@{/password/change}">パスワードを忘れた方</a>
+			</div>
+			
 			<input type="submit" value="ログイン" class="btn btn-primary" />
 		</form>
 	</div>

@@ -91,4 +91,17 @@ public class UserServiceImpl implements UserService {
 		return userEntity;
 	}
 
+	/**
+	 * パスワード更新用
+	 */
+	@Override
+	public void updatePassword(String email, String encodedPassword) {
+		UserEntity u = userRepository.findByEmail(email).orElse(null);
+		if (u == null) {
+			throw new IllegalArgumentException("ユーザーが見つかりません");
+		}
+		u.setPassword(encodedPassword);
+		userRepository.save(u);
+	}
+
 }
