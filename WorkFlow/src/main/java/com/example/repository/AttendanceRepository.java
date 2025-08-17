@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.domain.entity.AttendanceEntity;
 import com.example.domain.entity.UserEntity;
+import com.example.domain.enums.AttendanceType;
 
 /**
  * アテンダンスリポシトリークラス
@@ -22,4 +23,13 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, In
 	AttendanceEntity findFirstByUserEntityIdOrderByAtDesc(Integer userId);
 	
 	Optional<AttendanceEntity> findByUserEntityAndWorkDate(UserEntity userEntity, LocalDate workDate);
+	
+	/**
+	 * 制御考慮
+	 * @param userId
+	 * @param type
+	 * @param workDate
+	 * @return
+	 */
+	boolean existsByUserEntityIdAndTypeAndWorkDate(Integer userId, AttendanceType type, LocalDate workDate);
 }

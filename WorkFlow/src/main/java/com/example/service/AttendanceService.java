@@ -25,4 +25,6 @@ public interface AttendanceService {
 	 * @param email
 	 */
 	public AttendanceType getLoginUserType(Integer userId);
+	
+	boolean hasPunchedToday(Integer userId, AttendanceType type);
 }

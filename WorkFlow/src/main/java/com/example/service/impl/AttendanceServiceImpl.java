@@ -90,4 +90,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 			return type;
 		}
 	}
+
+	public boolean hasPunchedToday(Integer userId, AttendanceType type) {
+		LocalDate today = LocalDate.now();
+		return attendanceRepository.existsByUserEntityIdAndTypeAndWorkDate(userId, type, today);
+	}
+
 }
