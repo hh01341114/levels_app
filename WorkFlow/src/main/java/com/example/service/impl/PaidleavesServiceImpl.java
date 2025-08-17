@@ -62,7 +62,7 @@ public class PaidleavesServiceImpl implements PaidleavesService {
 	}
 
 	/**
-	 *有給申請分の計算
+	 * 有給申請分の計算
 	 */
 	@Transactional
 	@Override
@@ -174,6 +174,26 @@ public class PaidleavesServiceImpl implements PaidleavesService {
 		paidLeave.setUsedDays(0f);
 
 		paidleavesRepository.save(paidLeave);
+	}
+
+	/**
+	 *有給残日数計算
+	 *ユーザー詳細表示用
+	 */
+	@Override
+	public float getRemainingDays(UserEntity user) {
+		LocalDate today = LocalDate.now();
+		List<PaidleavesEntity> active = paidleavesRepository.findByUserEntityAndRevocationDateAfter(user, today); // 失効前だけ対象
+
+		float total = 0f;
+		for (PaidleavesEntity p : active) {
+			float remaining = (p.getDays() != null ? p.getDays() : 0f)
+					- (p.getUsedDays() != null ? p.getUsedDays() : 0f);
+			if (remaining > 0f) {
+				total += remaining;
+			}
+		}
+		return total;
 	}
 
 }

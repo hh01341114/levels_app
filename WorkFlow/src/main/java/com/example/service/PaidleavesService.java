@@ -63,4 +63,11 @@ public interface PaidleavesService {
 	 */
 	void deductPaidLeaveDays(UserEntity userEntity, float daysToDeduct);
 	
+	/**
+	 * 有給残日数
+	 * @param user
+	 * @return
+	 */
+	float getRemainingDays(UserEntity user);
+	
 }
