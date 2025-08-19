@@ -91,9 +91,17 @@ public class AttendanceServiceImpl implements AttendanceService {
 		}
 	}
 
-	public boolean hasPunchedToday(Integer userId, AttendanceType type) {
+	/**
+	 * 打刻チェック
+	 */
+	public boolean hasPunchedToday(Integer userId) {
 		LocalDate today = LocalDate.now();
-		return attendanceRepository.existsByUserEntityIdAndTypeAndWorkDate(userId, type, today);
+		UserEntity user = userRepository.findById(userId).orElseThrow();
+
+		Optional<AttendanceEntity> attendanceOpt = attendanceRepository.findByUserEntityAndWorkDate(user, today);
+
+		//打刻判定
+		return attendanceOpt.isPresent();
 	}
 
 }

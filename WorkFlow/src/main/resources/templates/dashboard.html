@@ -30,9 +30,10 @@
 			<!-- ボタンエリア -->
 			<div class="col-md-3 d-flex flex-column dashboard-buttons">
 				<!--出勤ボタン-->
-				<form method="post" action="/attendance/punch" onsubmit="return confirm('本日の打刻を更新します。よろしいですか？');">>
+				<form method="post" action="/attendance/punch">
 					<input type="hidden" name="type" value="IN">
-					<button class="btn btn-success mb-2 w-100" type="submit" th:disabled="${!in}">出勤</button>
+					<button class="btn btn-success mb-2 w-100" type="submit" th:disabled="${!in}"
+						th:onclick="${alreadyIn} ? 'return confirm(\'本日の打刻を更新します。よろしいですか？\')' : null">出勤</button>
 				</form>
 				<!-- 休憩開始ボタン -->
 				<form method="post" action="/attendance/punch">

@@ -51,7 +51,7 @@ public class DashboardController {
 		model.addAttribute("out", out);
 		model.addAttribute("breakIn", breakIn);
 		model.addAttribute("breakOut", breakOut);
-		model.addAttribute("alreadyIn", attendanceService.hasPunchedToday(loginUser.getId(), AttendanceType.IN));
+		model.addAttribute("alreadyIn", attendanceService.hasPunchedToday(loginUser.getId()));
 
 		// Thymeleafテンプレートに遷移
 		return "dashboard";

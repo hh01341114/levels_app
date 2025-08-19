@@ -26,5 +26,11 @@ public interface AttendanceService {
 	 */
 	public AttendanceType getLoginUserType(Integer userId);
 	
-	boolean hasPunchedToday(Integer userId, AttendanceType type);
+	/**
+	 * 今日打刻したかチェック
+	 * @param userId
+	 * @param type
+	 * @return
+	 */
+	boolean hasPunchedToday(Integer userId);
 }
