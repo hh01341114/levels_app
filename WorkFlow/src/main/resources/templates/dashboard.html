@@ -9,6 +9,7 @@
 
 	<!--CSS読み込み-->
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/layout/dashbard.css}">
 	<!-- jQuery と Bootstrap JS -->
 	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 	<script th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.bundle.min.js}"></script>
@@ -28,7 +29,7 @@
 			</div>
 
 			<!-- ボタンエリア -->
-			<div class="col-md-3 d-flex flex-column dashboard-buttons">
+			<div class="dashboard-buttons">
 				<!--出勤ボタン-->
 				<form method="post" action="/attendance/punch">
 					<input type="hidden" name="type" value="IN">
