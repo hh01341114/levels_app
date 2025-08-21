@@ -10,36 +10,42 @@
 
 <body layout:fragment="content">
 	<h2>カレンダー管理（登録）</h2>
-
 	<form th:action="@{/admin/calendar}" th:object="${calendarForm}" method="post">
-		<div>
+		<div class="mb-1">
 			<label>開始日</label>
-			<input type="date" th:field="*{startDate}" required>
+			<input class="form-control" type="date" th:field="*{startDate}" required>
 			<div th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
 		</div>
 
-		<div>
+		<div class="mb-1">
 			<label>終了日</label>
-			<input type="date" th:field="*{endDate}" required>
+			<input class="form-control" type="date" th:field="*{endDate}" required>
 			<div th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></div>
 		</div>
 
-		<div>
-			<label>タイトル</label>
-			<input type="text" th:field="*{eventTitle}" placeholder="例: 夏季休暇" required>
+		<div class="mb-1">
+			<label class="form-label">タイトル</label>
+			<input class="form-control" type="text" th:field="*{eventTitle}" placeholder="例: 夏季休暇" required>
 			<div th:if="${#fields.hasErrors('eventTitle')}" th:errors="*{eventTitle}"></div>
 		</div>
 
-		<div>
+		<div class="mb-1">
+			<label for="exampleFormControlTextarea1" class="form-label">概要</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+		</div>
+
+		<div class="mb-3">
 			<label>種別</label>
-			<select th:field="*{eventType}">
+			<select class="form-control" th:field="*{eventType}">
 				<option th:each="t : ${T(com.example.domain.enums.CalendarEnum).values()}" th:value="${t}"
 					th:text="${t.label}">
 				</option>
 			</select>
 		</div>
-
-		<button type="submit">登録</button>
+		<div class="text-center">
+			<button class="btn btn btn-success" type="submit">登録</button>
+		</div>
 	</form>
 </body>
+
 </html>
