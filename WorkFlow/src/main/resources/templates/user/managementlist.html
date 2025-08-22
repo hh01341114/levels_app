@@ -39,8 +39,8 @@
 					<td th:text="${item.departmentName}"></td>
 					<td class="align-middle">
 						<div class="gap-4 text-nowrap">
-							<a class="btn btn-primary btn-sm" th:href="@{'/user/detail/' + ${item.email}}">ユーザー情報を編集する</a>
-							<a class="btn btn-primary ms-3 btn-sm" th:href="@{'/attendancemanagement/history/' + ${item.email}}">勤怠履歴を確認する</a>
+							<a class="btn btn-outline-primary btn-sm" th:href="@{'/user/detail/' + ${item.email}}">編集</a>
+							<a class="btn btn-outline-primary ms-3 btn-sm" th:href="@{'/attendancemanagement/history/' + ${item.email}}">確認</a>
 						</div>
 					</td>
 				</tr>

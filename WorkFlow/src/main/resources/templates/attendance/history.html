@@ -31,7 +31,7 @@
 		<form th:action="@{/attendance/history/csv}" method="get">
 			<input type="hidden" name="year" th:value="${targetYear}" />
 			<input type="hidden" name="month" th:value="${targetMonth}" />
-			<button type="submit" class="btn btn-primary mt-3">CSV出力</button>
+			<button type="submit" class="btn btn-secondary mt-3">CSV出力</button>
 		</form>
 		<table class="table table-bordered table-striped">
 			<thead class="table-dark">
