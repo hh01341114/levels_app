@@ -49,4 +49,11 @@ public interface PaidleavesRepository extends JpaRepository<PaidleavesEntity, In
 	 */
 	List<PaidleavesEntity> findByUserEntityAndRevocationDateGreaterThanEqualOrderByGrantDateAsc(UserEntity user, LocalDate today);
 	
+	/**
+	 * 有給管理表示用
+	 * @return
+	 */
+	List<PaidleavesEntity> findAllByOrderByUserEntity_NameAscGrantDateAsc();
+	
 	}
+

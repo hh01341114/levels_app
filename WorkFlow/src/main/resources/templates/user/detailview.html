@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<html xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 
 <head>
 	<title>ユーザー詳細</title>
@@ -12,7 +13,8 @@
 		<div class="header border-bottom">
 			<h1 class="h2">ユーザー詳細画面</h1>
 		</div>
-		<form id="user-detail-form" method="post" th:action="@{/user/detailview}" class="form-signup" th:object="${userDetailForm}">
+		<form id="user-detail-form" method="post" th:action="@{/user/detailview}" class="form-signup"
+			th:object="${userDetailForm}">
 			<!--ユーザー詳細画面-->
 			<table class="table table-striped table-borderd table-hover">
 				<tbody>
@@ -21,25 +23,22 @@
 						<td th:text="*{email}"></td>
 					</tr>
 					<tr>
-						<th class="w-25">パスワード</th>
-						<td th:text="*{password}"></td>
-					</tr>
-					<tr>
 						<th class="w-25">ユーザー名</th>
 						<td th:text="*{name}"></td>
 					</tr>
 					<tr>
 						<th class="w-25">部署名</th>
-						<td th:text="*{departmentId}"></td>
+						<td th:text="*{departmentName}"></td>
 					</tr>
 					<tr>
 						<th>有給残日数</th>
-						<td></td>
+						<td th:text="|${remainingDays}日|"></td>
 					</tr>
 				</tbody>
 			</table>
 		</form>
-		<a class="nav-link" th:href="@{'/user/detail/' + ${user.email}}">ユーザー詳細編集</a>
+		<a class="btn btn-outline-primary" type="submit" th:href="@{'/user/detail/' + ${user.email}}">ユーザー詳細編集</a>
 	</div>
 </body>
+
 </html>

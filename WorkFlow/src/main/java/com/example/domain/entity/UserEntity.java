@@ -12,7 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
+import com.example.domain.enums.DepartmentEnum;
 import com.example.domain.enums.Role;
 
 import lombok.Data;
@@ -54,6 +56,18 @@ public class UserEntity {
 	 */
 	@Column(name = "department_id")
 	private Integer departmentId;
+
+	
+	/**
+	 * 部署名をもつ
+	 * Enum変数で変換
+	 * @return
+	 */
+	@Transient
+	public String getDepartmentName() {
+		DepartmentEnum dep = DepartmentEnum.fromId(this.departmentId);
+		return dep != null ? dep.getLabel() : "";
+	}
 
 	/**
 	 * 入社日

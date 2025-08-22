@@ -58,12 +58,6 @@ public interface RequestService {
 	 */
 	void saveCorrectionRequest(UserEntity userEntity, RequestForm requestForm);
 
-	/**
-	 * 承認用ユーザー申請一覧取得
-	 * 
-	 * @return
-	 */
-	List<UserEntity> findDistinctUsersWithPendingRequests();
 	
 	/**
 	 * カレンダー用有給承認取得
@@ -73,5 +67,11 @@ public interface RequestService {
 	 * @return
 	 */
 	List<RequestEntity> getApprovedList(UserEntity userEntity, LocalDate startDate, LocalDate endDate);
+
+	/**
+	 * 承認画面用リスト表示
+	 * @return
+	 */
+	List<RequestEntity> findAllWithUserOrderBySubmittedAtDesc();
 
 }
